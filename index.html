@@ -7,7 +7,7 @@
   <meta name="description" content="Das Hausparty Lokal in Zazenhausen. Freitag & Samstag geöffnet. Deine Anlaufstelle für unvergessliche Nächte im Wohngebiet." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -22,7 +22,7 @@
       --white:   #f2ece4;
       --muted:   #7a746c;
       --font-h:  'Anton', sans-serif;
-      --font-s:  'Playfair Display', serif;
+      --font-s:  'Inter', sans-serif;
       --font-b:  'Inter', sans-serif;
     }
 
@@ -45,11 +45,30 @@
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23f)' opacity='.5'/%3E%3C/svg%3E");
     }
 
+    /* PARTNER BAR */
+    #partner-bar {
+      position:fixed; top:0; left:0; right:0; z-index:600;
+      background:var(--card); border-bottom:1px solid var(--border);
+      display:flex; align-items:center; justify-content:center; gap:1rem;
+      padding:.55rem 2rem; font-size:.72rem; letter-spacing:.08em;
+    }
+    .pb-label {
+      color:var(--muted); text-transform:uppercase; letter-spacing:.15em; font-size:.65rem;
+      padding-right:1rem; border-right:1px solid var(--border);
+    }
+    .pb-link {
+      color:var(--white); text-decoration:none;
+      display:flex; align-items:center; gap:.5rem;
+      transition:color .2s;
+    }
+    .pb-link:hover { color:var(--red); }
+    .pb-link svg { width:13px; height:13px; flex-shrink:0; }
+
     /* NAV */
     nav {
-      position:fixed; top:0; left:0; right:0; z-index:500;
+      position:fixed; top:34px; left:0; right:0; z-index:500;
       display:flex; align-items:center; justify-content:space-between;
-      padding:1.4rem 3rem;
+      padding:1.2rem 3rem;
       transition: background .4s, border .4s;
     }
     nav.scrolled {
@@ -122,10 +141,10 @@
       animation:up 1s .18s ease both;
     }
     .hero-desc {
-      font-family:var(--font-s);
-      font-size:clamp(1rem,1.6vw,1.25rem);
-      font-weight:400; font-style:italic;
-      color:var(--muted); max-width:420px; line-height:1.8;
+      font-family:var(--font-b);
+      font-size:clamp(1rem,1.6vw,1.15rem);
+      font-weight:400;
+      color:var(--muted); max-width:420px; line-height:1.75;
     }
     .hero-ctas { display:flex; gap:1rem; flex-wrap:wrap; }
     .btn-r {
@@ -163,8 +182,8 @@
       font-size:2.2rem; letter-spacing:.08em;
     }
     .hs-time {
-      font-family:var(--font-s);
-      font-size:1.1rem; font-style:italic; color:var(--muted);
+      font-family:var(--font-b);
+      font-size:1rem; font-weight:500; color:var(--muted);
     }
     .hs-dot {
       width:10px; height:10px; border-radius:50%;
@@ -207,9 +226,9 @@
     }
     .divider { width:50px; height:2px; background:var(--red); margin:2rem 0; }
     .body-text {
-      font-family:var(--font-s);
-      font-size:1.05rem; font-weight:400;
-      color:var(--muted); line-height:1.95;
+      font-family:var(--font-b);
+      font-size:1rem; font-weight:400;
+      color:var(--muted); line-height:1.85;
     }
     .body-text + .body-text { margin-top:1.2rem; }
 
@@ -446,7 +465,9 @@
 
     /* MOBILE */
     @media(max-width:900px){
-      nav { padding:1.1rem 1.5rem; }
+      nav { padding:1.1rem 1.5rem; top:32px; }
+      #partner-bar { font-size:.62rem; gap:.6rem; }
+      .pb-label { display:none; }
       .nav-r a { display:none; }
       .hero { padding:0 1.5rem 4rem; }
       .hours-strip { flex-direction:column; }
@@ -478,6 +499,15 @@
 <div id="curR"></div>
 
 <!-- NAV -->
+<!-- PARTNER BAR -->
+<div id="partner-bar">
+  <span class="pb-label">Unser Partner</span>
+  <a href="https://maps.app.goo.gl/pUUZiSGL5hqAGxNQ9" target="_blank" class="pb-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Massagesalon — direkt auf Google Maps ansehen →
+  </a>
+</div>
+
 <nav id="nav">
   <a href="#" class="logo">DERRICK'S <em>Zazenhausen</em></a>
   <div class="nav-r">
@@ -485,7 +515,7 @@
     <a href="#location">Location</a>
     <a href="#mgmt">Management</a>
     <a href="#contact">Kontakt</a>
-    <div class="open-badge">Fr &amp; Sa geöffnet</div>
+    <div class="open-badge">Do · Fr · Sa geöffnet</div>
   </div>
 </nav>
 
@@ -502,7 +532,7 @@
   <div class="hero-row">
     <p class="hero-desc">Das Hausparty Lokal in Zazenhausen — deine Anlaufstelle für unvergessliche Abende im Wohngebiet. Freitag &amp; Samstag geöffnet.</p>
     <div class="hero-ctas">
-      <a href="https://maps.app.goo.gl/mtoMqm8WUqktwHgJ6" target="_blank" class="btn-r">Auf Maps finden</a>
+      <a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank" class="btn-r">Auf Maps finden</a>
       <a href="#contact" class="btn-o">Tisch reservieren</a>
     </div>
   </div>
@@ -510,52 +540,24 @@
 
 <!-- ÖFFNUNGSZEITEN STRIP -->
 <div class="hours-strip r">
-  <div class="hs-day hs-closed">
-    <div>
-      <div class="hs-name">Montag</div>
-      <div class="hs-time">Geschlossen</div>
-    </div>
-    <div class="hs-dot"></div>
-  </div>
-  <div class="hs-day hs-closed">
-    <div>
-      <div class="hs-name">Dienstag</div>
-      <div class="hs-time">Geschlossen</div>
-    </div>
-    <div class="hs-dot"></div>
-  </div>
-  <div class="hs-day hs-closed">
-    <div>
-      <div class="hs-name">Mittwoch</div>
-      <div class="hs-time">Geschlossen</div>
-    </div>
-    <div class="hs-dot"></div>
-  </div>
-  <div class="hs-day hs-closed">
+  <div class="hs-day">
     <div>
       <div class="hs-name">Donnerstag</div>
-      <div class="hs-time">Geschlossen</div>
+      <div class="hs-time">20:00 – 03:00 Uhr</div>
     </div>
     <div class="hs-dot"></div>
   </div>
   <div class="hs-day">
     <div>
       <div class="hs-name">Freitag</div>
-      <div class="hs-time">Abends geöffnet</div>
+      <div class="hs-time">22:00 – 07:30 Uhr</div>
     </div>
     <div class="hs-dot"></div>
   </div>
-  <div class="hs-day">
+  <div class="hs-day" style="border-right:none;">
     <div>
       <div class="hs-name">Samstag</div>
-      <div class="hs-time">Abends geöffnet</div>
-    </div>
-    <div class="hs-dot"></div>
-  </div>
-  <div class="hs-day hs-closed">
-    <div>
-      <div class="hs-name">Sonntag</div>
-      <div class="hs-time">Geschlossen</div>
+      <div class="hs-time">22:00 – 07:30 Uhr</div>
     </div>
     <div class="hs-dot"></div>
   </div>
@@ -628,7 +630,7 @@
       </div>
       <div class="detail-cell">
         <div class="detail-k">Öffnungszeiten</div>
-        <div class="detail-v">Fr &amp; Sa, abends</div>
+        <div class="detail-v">Do 20–03 · Fr &amp; Sa 22–07:30</div>
       </div>
       <div class="detail-cell">
         <div class="detail-k">Typ</div>
@@ -726,13 +728,13 @@
     <div class="divider"></div>
     <p class="body-text">Tisch reservieren, Lokal privat buchen oder einfach mehr erfahren — schreib uns oder find uns direkt auf Google Maps.</p>
     <div class="contact-links">
-      <a href="mailto:info@derricks-zazenhausen.de" class="clink">
+      <a href="/cdn-cgi/l/email-protection#80e9eee6efc0e4e5f2f2e9e3ebf3adfae1fae5eee8e1f5f3e5eeaee4e5" class="clink">
         <div class="clink-icon">
           <svg viewBox="0 0 24 24"><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
         </div>
         <div>
           <span class="clink-lbl">E-Mail</span>
-          <span class="clink-val">info@derricks-zazenhausen.de</span>
+          <span class="clink-val"><span class="__cf_email__" data-cfemail="f49d9a929bb4909186869d979f87d98e958e919a9c958187919ada9091">[email&#160;protected]</span></span>
         </div>
       </a>
       <a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank" class="clink">
@@ -776,11 +778,11 @@
 <!-- FOOTER -->
 <footer>
   <div class="f-logo">DERRICK'S <em>Zazenhausen</em></div>
-  <div class="f-mid">Hausparty / Eventveranstaltungen · MGMT Derrick Derrick<br />Zazenhausen, Stuttgart · Fr &amp; Sa geöffnet</div>
+  <div class="f-mid">Hausparty / Eventveranstaltungen · MGMT Derrick Derrick<br />Zazenhausen, Stuttgart · Do 20–03 · Fr &amp; Sa 22–07:30 Uhr</div>
   <div class="f-r">© 2025 MGMT Derrick Derrick<br /><a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank">Auf Google Maps →</a></div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Cursor
   const cur = document.getElementById('cur');
   const curR = document.getElementById('curR');
@@ -798,10 +800,4 @@
   window.addEventListener('scroll',()=>{ nav.classList.toggle('scrolled', window.scrollY>50); });
 
   // Reveal
-  const obs = new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('v'); });
-  },{ threshold:.08, rootMargin:'0px 0px -40px 0px' });
-  document.querySelectorAll('.r').forEach(el=>obs.observe(el));
-</script>
-</body>
-</html>
+  const obs = 
