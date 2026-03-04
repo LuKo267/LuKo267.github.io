@@ -4,205 +4,462 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Derrick's | Hausparty Lokal Zazenhausen</title>
-<meta name="description" content="Das Hausparty Lokal in Zazenhausen. Do, Fr & Sa geöffnet.">
+<meta name="description" content="Das Hausparty Lokal in Zazenhausen. Do, Fr und Sa geöffnet.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --black:#060606;--deep:#0e0e0e;--card:#141414;--border:#222;
-  --red:#d10024;--red2:#ff0030;--glow:rgba(209,0,36,.4);
-  --white:#f2ece4;--muted:#888;
-  --fh:'Anton',sans-serif;--fb:'Inter',sans-serif;
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #060606;
+  --deep:  #0e0e0e;
+  --card:  #141414;
+  --border:#222222;
+  --red:   #d10024;
+  --red2:  #ff0030;
+  --glow:  rgba(209,0,36,.4);
+  --white: #f2ece4;
+  --muted: #888888;
+  --fh: 'Anton', sans-serif;
+  --fb: 'Inter', sans-serif;
 }
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:var(--fb);overflow-x:hidden;cursor:none}
-#cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
-#curR{position:fixed;width:34px;height:34px;border:1px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .2s ease;opacity:.45}
 
-/* PARTNER BAR */
-#pbar{
-  position:fixed;top:0;left:0;right:0;z-index:600;
-  background:var(--card);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;gap:1rem;
-  padding:.5rem 2rem;font-size:.72rem;
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--fb);
+  overflow-x: hidden;
+  cursor: none;
 }
-.pbar-lbl{color:var(--muted);text-transform:uppercase;letter-spacing:.15em;font-size:.63rem;padding-right:1rem;border-right:1px solid var(--border)}
-.pbar-link{color:var(--white);text-decoration:none;display:flex;align-items:center;gap:.5rem;transition:color .2s;letter-spacing:.04em}
-.pbar-link:hover{color:var(--red)}
-.pbar-link svg{width:13px;height:13px;flex-shrink:0}
 
-/* NAV */
-nav{
-  position:fixed;top:34px;left:0;right:0;z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.2rem 3rem;
-  transition:background .4s,border-color .4s;
+/* ── CURSOR ── */
+#cur {
+  position: fixed;
+  width: 12px; height: 12px;
+  background: var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  left: -100px; top: -100px;
+  transform: translate(-50%,-50%);
+  transition: transform .12s;
 }
-nav.scrolled{background:rgba(6,6,6,.96);border-bottom:1px solid var(--border);backdrop-filter:blur(12px)}
-.logo{font-family:var(--fh);font-size:1.5rem;letter-spacing:.12em;color:var(--white);text-decoration:none}
-.logo em{color:var(--red);font-style:normal}
-.nav-r{display:flex;align-items:center;gap:2rem}
-.nav-r a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .25s}
-.nav-r a:hover{color:var(--white)}
-.open-badge{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;background:var(--red);color:var(--white);padding:.35rem .9rem;display:flex;align-items:center;gap:.5rem}
-.open-badge::before{content:'●';font-size:.45rem;animation:blink 1.6s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+#curR {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--red);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  left: -100px; top: -100px;
+  transform: translate(-50%,-50%);
+  transition: left .07s, top .07s, width .2s, height .2s, opacity .2s;
+  opacity: 0.5;
+}
 
-/* HERO */
-.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:0 3rem 5rem;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 55% 35%,rgba(209,0,36,.18) 0%,transparent 65%),radial-gradient(ellipse 30% 30% at 85% 75%,rgba(209,0,36,.09) 0%,transparent 55%)}
-.hero-deco{position:absolute;top:50%;left:-2rem;transform:translateY(-55%);font-family:var(--fh);font-size:clamp(14rem,28vw,26rem);color:rgba(255,255,255,.025);line-height:1;pointer-events:none;letter-spacing:-.02em;white-space:nowrap}
-.hero-eye{font-size:.7rem;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:1.2rem;display:flex;align-items:center;gap:.8rem;animation:up .8s ease both}
-.hero-eye::before{content:'';width:35px;height:1px;background:var(--red);display:block}
-.hero-h1{font-family:var(--fh);font-size:clamp(4.5rem,14vw,13rem);line-height:.88;letter-spacing:.01em;animation:up .9s .08s ease both}
-.hero-h1 .red{color:var(--red)}
-.hero-row{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2.5rem;animation:up 1s .18s ease both}
-.hero-desc{font-size:clamp(.95rem,1.5vw,1.1rem);font-weight:400;color:var(--muted);max-width:420px;line-height:1.75}
-.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap}
-.btn-r{background:var(--red);color:var(--white);padding:.85rem 2.2rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:none;font-family:var(--fb);transition:background .25s,transform .2s;box-shadow:0 0 28px var(--glow);cursor:none;display:inline-block}
-.btn-r:hover{background:var(--red2);transform:translateY(-2px)}
-.btn-o{border:1px solid var(--border);color:var(--white);padding:.85rem 2.2rem;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;display:inline-block;transition:border-color .25s;cursor:none}
-.btn-o:hover{border-color:var(--white)}
+/* ── PARTNER BAR ── */
+#pbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 700;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  padding: .5rem 2rem;
+  font-size: .74rem;
+  letter-spacing: .04em;
+}
+.pbar-lbl {
+  color: var(--muted); text-transform: uppercase;
+  letter-spacing: .15em; font-size: .63rem;
+  padding-right: 1rem; border-right: 1px solid var(--border);
+}
+.pbar-link {
+  color: var(--white); text-decoration: none;
+  display: flex; align-items: center; gap: .5rem;
+  transition: color .2s;
+}
+.pbar-link:hover { color: var(--red); }
+.pbar-link svg { width: 13px; height: 13px; flex-shrink: 0; }
 
-/* HOURS STRIP */
-.hours-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1}
-.hs-day{padding:2.5rem 3rem;border-right:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:1rem;transition:background .3s}
-.hs-day:last-child{border-right:none}
-.hs-day:hover{background:rgba(209,0,36,.05)}
-.hs-name{font-family:var(--fh);font-size:2rem;letter-spacing:.06em}
-.hs-time{font-size:1rem;font-weight:500;color:var(--muted);margin-top:.25rem}
-.hs-dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex-shrink:0;box-shadow:0 0 10px var(--red)}
+/* ── NAV ── */
+nav {
+  position: fixed; top: 33px; left: 0; right: 0; z-index: 600;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  transition: background .4s;
+}
+nav.scrolled {
+  background: rgba(6,6,6,.97);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+.logo {
+  font-family: var(--fh); font-size: 1.5rem; letter-spacing: .12em;
+  color: var(--white); text-decoration: none;
+}
+.logo em { color: var(--red); font-style: normal; }
+.nav-r { display: flex; align-items: center; gap: 2rem; }
+.nav-r a {
+  font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none; transition: color .25s;
+}
+.nav-r a:hover { color: var(--white); }
+.open-badge {
+  font-size: .65rem; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--red); color: var(--white);
+  padding: .35rem .9rem; display: flex; align-items: center; gap: .5rem;
+}
+.open-badge::before { content: '●'; font-size: .45rem; animation: blink 1.6s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
 
-/* ABOUT */
-.about{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);position:relative;z-index:1}
-.about-l{padding:5rem 3rem;border-right:1px solid var(--border);background:var(--deep);position:relative;overflow:hidden}
-.about-l-deco{position:absolute;bottom:-2rem;right:-1rem;font-family:var(--fh);font-size:18rem;color:rgba(209,0,36,.05);line-height:1;pointer-events:none}
-.about-r{padding:5rem 3rem}
-.tag{font-size:.63rem;letter-spacing:.35em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:block}
-.big-h{font-family:var(--fh);font-size:clamp(2.5rem,5vw,4rem);line-height:.92;letter-spacing:.04em}
-.divider{width:50px;height:2px;background:var(--red);margin:1.8rem 0}
-.body-text{font-size:1rem;font-weight:400;color:var(--muted);line-height:1.85}
-.body-text+.body-text{margin-top:1rem}
-.vibe-list{margin-top:2rem;display:flex;flex-direction:column;gap:.75rem}
-.vibe-item{display:flex;align-items:center;gap:.9rem;font-size:.88rem;color:var(--muted)}
-.vibe-item::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
-.maps-note{margin-top:2rem;padding:1.5rem;border:1px solid var(--border);background:var(--card)}
-.maps-note-label{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem}
-.maps-note-val{font-size:.95rem;line-height:1.6}
-.maps-note-sub{font-size:.68rem;color:var(--muted);letter-spacing:.1em;margin-top:.3rem;text-transform:uppercase}
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; position: relative;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 3rem 5rem;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 55% 35%, rgba(209,0,36,.18) 0%, transparent 65%),
+    radial-gradient(ellipse 30% 30% at 85% 75%, rgba(209,0,36,.09) 0%, transparent 55%);
+}
+.hero-deco {
+  position: absolute; top: 50%; left: -2rem; transform: translateY(-55%);
+  font-family: var(--fh); font-size: clamp(14rem,28vw,26rem);
+  color: rgba(255,255,255,.025); line-height: 1;
+  pointer-events: none; letter-spacing: -.02em; white-space: nowrap;
+}
+.hero-eye {
+  font-size: .7rem; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 1.2rem;
+  display: flex; align-items: center; gap: .8rem;
+  animation: up .8s ease both;
+}
+.hero-eye::before { content: ''; width: 35px; height: 1px; background: var(--red); display: block; }
+.hero-h1 {
+  font-family: var(--fh);
+  font-size: clamp(4.5rem,14vw,13rem);
+  line-height: .88; letter-spacing: .01em;
+  animation: up .9s .08s ease both;
+}
+.hero-h1 .red { color: var(--red); }
+.hero-row {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+  margin-top: 2.5rem;
+  animation: up 1s .18s ease both;
+}
+.hero-desc {
+  font-size: clamp(.95rem,1.5vw,1.1rem); font-weight: 400;
+  color: var(--muted); max-width: 420px; line-height: 1.75;
+}
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn-r {
+  background: var(--red); color: var(--white);
+  padding: .85rem 2.2rem; font-size: .75rem; letter-spacing: .18em;
+  text-transform: uppercase; text-decoration: none;
+  border: none; font-family: var(--fb); display: inline-block;
+  transition: background .25s, transform .2s;
+  box-shadow: 0 0 28px var(--glow); cursor: none;
+}
+.btn-r:hover { background: var(--red2); transform: translateY(-2px); }
+.btn-o {
+  border: 1px solid var(--border); color: var(--white);
+  padding: .85rem 2.2rem; font-size: .75rem; letter-spacing: .18em;
+  text-transform: uppercase; text-decoration: none; display: inline-block;
+  transition: border-color .25s; cursor: none;
+}
+.btn-o:hover { border-color: var(--white); }
 
-/* MAPS SECTION */
-.maps-section{border-top:1px solid var(--border);display:grid;grid-template-columns:1.1fr 1fr;position:relative;z-index:1}
-.maps-frame{position:relative;min-height:500px;overflow:hidden}
-.maps-frame iframe{width:100%;height:100%;border:none;min-height:500px;filter:grayscale(100%) contrast(1.1) brightness(.7) sepia(.3)}
-.maps-frame::before{content:'';position:absolute;inset:0;z-index:2;background:linear-gradient(to right,transparent 70%,var(--black) 100%),linear-gradient(to bottom,var(--black) 0%,transparent 12%,transparent 88%,var(--black) 100%);pointer-events:none}
-.maps-pin{position:absolute;top:50%;left:50%;z-index:3;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;animation:float 2.5s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translate(-50%,-100%)}50%{transform:translate(-50%,-112%)}}
-.maps-pin-dot{width:18px;height:18px;border-radius:50%;background:var(--red);box-shadow:0 0 20px var(--glow),0 0 40px var(--glow)}
-.maps-pin-line{width:2px;height:28px;background:linear-gradient(to bottom,var(--red),transparent)}
-.maps-info{padding:5rem 3rem;background:var(--deep);border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
-.maps-lbl{display:inline-flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--border);padding:.5rem 1rem;font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2.5rem}
-.maps-lbl svg{width:14px;height:14px;fill:var(--red)}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:2.5rem;border:1px solid var(--border)}
-.detail-cell{background:var(--card);padding:1.4rem;transition:background .3s}
-.detail-cell:hover{background:rgba(209,0,36,.06)}
-.detail-k{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
-.detail-v{font-size:.93rem;font-weight:400;line-height:1.5}
-.maps-cta{margin-top:2.5rem;display:inline-flex;align-items:center;gap:.8rem;text-decoration:none;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--red);transition:gap .25s}
-.maps-cta:hover{gap:1.4rem}
-.maps-cta::after{content:'→'}
+/* ── HOURS STRIP ── */
+.hours-strip {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+.hs-day {
+  padding: 2.5rem 3rem; border-right: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; transition: background .3s;
+}
+.hs-day:last-child { border-right: none; }
+.hs-day:hover { background: rgba(209,0,36,.05); }
+.hs-name { font-family: var(--fh); font-size: 2rem; letter-spacing: .06em; }
+.hs-time { font-size: 1rem; font-weight: 500; color: var(--muted); margin-top: .25rem; }
+.hs-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+  box-shadow: 0 0 10px var(--red);
+}
 
-/* VIBE CARDS */
-.vibe-section{border-top:1px solid var(--border);padding:5rem 3rem;position:relative;z-index:1;background:var(--deep)}
-.vibe-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:2.5rem}
-.vibe-sub{font-size:.95rem;color:var(--muted);max-width:340px;line-height:1.75}
-.vibe-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border)}
-.vibe-card{background:var(--card);aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;position:relative;overflow:hidden;transition:transform .4s}
-.vibe-card:hover{transform:scale(1.02);z-index:2}
-.vibe-card-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(209,0,36,.15) 0%,transparent 60%)}
-.vibe-card-num{position:absolute;top:1rem;right:1rem;font-family:var(--fh);font-size:3.5rem;color:rgba(255,255,255,.06)}
-.vibe-card-title{font-family:var(--fh);font-size:1.1rem;letter-spacing:.06em;position:relative;z-index:1}
-.vibe-card-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem;position:relative;z-index:1}
-.vibe-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transition:transform .4s}
-.vibe-card:hover::after{transform:scaleX(1)}
+/* ── ABOUT ── */
+.about {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+.about-l {
+  padding: 5rem 3rem; border-right: 1px solid var(--border);
+  background: var(--deep); position: relative; overflow: hidden;
+}
+.about-l-deco {
+  position: absolute; bottom: -2rem; right: -1rem;
+  font-family: var(--fh); font-size: 18rem;
+  color: rgba(209,0,36,.05); line-height: 1; pointer-events: none;
+}
+.about-r { padding: 5rem 3rem; }
+.tag {
+  font-size: .63rem; letter-spacing: .35em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 1rem; display: block;
+}
+.big-h {
+  font-family: var(--fh);
+  font-size: clamp(2.5rem,5vw,4rem);
+  line-height: .92; letter-spacing: .04em;
+}
+.divider { width: 50px; height: 2px; background: var(--red); margin: 1.8rem 0; }
+.body-text { font-size: 1rem; font-weight: 400; color: var(--muted); line-height: 1.85; }
+.body-text + .body-text { margin-top: 1rem; }
+.vibe-list { margin-top: 2rem; display: flex; flex-direction: column; gap: .75rem; }
+.vibe-item {
+  display: flex; align-items: center; gap: .9rem;
+  font-size: .88rem; color: var(--muted);
+}
+.vibe-item::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--red); flex-shrink: 0;
+}
+.maps-note {
+  margin-top: 2rem; padding: 1.5rem;
+  border: 1px solid var(--border); background: var(--card);
+}
+.maps-note-label {
+  font-size: .6rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--red); margin-bottom: .5rem;
+}
+.maps-note-val { font-size: .95rem; line-height: 1.6; }
+.maps-note-sub {
+  font-size: .68rem; color: var(--muted);
+  letter-spacing: .1em; margin-top: .3rem; text-transform: uppercase;
+}
 
-/* MGMT */
-.mgmt-section{border-top:1px solid var(--border);padding:5rem 3rem;position:relative;z-index:1;display:grid;grid-template-columns:1fr 2fr;gap:5rem;align-items:start}
-.mgmt-label{font-family:var(--fh);font-size:clamp(3rem,8vw,7rem);line-height:.88;color:rgba(255,255,255,.07);position:sticky;top:7rem}
-.mgmt-label span{color:rgba(209,0,36,.2)}
-.mgmt-row{display:flex;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
-.mgmt-row:first-child{border-top:1px solid var(--border)}
-.mgmt-num{font-family:var(--fh);font-size:3.5rem;color:var(--border);line-height:1;flex-shrink:0;width:80px}
-.mgmt-row-title{font-family:var(--fh);font-size:1.5rem;letter-spacing:.06em;margin-bottom:.6rem}
-.mgmt-row-text{font-size:.95rem;color:var(--muted);line-height:1.85}
+/* ── LOCATION INFO (no map) ── */
+.location-section {
+  border-top: 1px solid var(--border);
+  background: var(--deep);
+  position: relative; z-index: 1;
+  padding: 5rem 3rem;
+}
+.location-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+}
+.detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--border);
+  margin-top: 2.5rem; border: 1px solid var(--border);
+}
+.detail-cell { background: var(--card); padding: 1.4rem; transition: background .3s; }
+.detail-cell:hover { background: rgba(209,0,36,.06); }
+.detail-k {
+  font-size: .6rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--red); margin-bottom: .4rem;
+}
+.detail-v { font-size: .95rem; font-weight: 400; line-height: 1.5; }
+.maps-cta {
+  margin-top: 2rem; display: inline-flex; align-items: center; gap: .8rem;
+  text-decoration: none; font-size: .78rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--red); transition: gap .25s;
+  background: rgba(209,0,36,.1); padding: .85rem 1.6rem;
+  border: 1px solid var(--red);
+}
+.maps-cta:hover { gap: 1.4rem; background: var(--red); color: var(--white); }
+.maps-cta::after { content: '→'; }
+.location-note {
+  padding: 2rem; border: 1px solid var(--border); background: var(--card);
+  margin-top: 2rem;
+}
+.location-note p { font-size: .95rem; color: var(--muted); line-height: 1.8; }
 
-/* CONTACT */
-.contact{border-top:1px solid var(--border);display:grid;grid-template-columns:1fr 1fr;position:relative;z-index:1}
-.contact-l{padding:5rem 3rem;background:var(--red);position:relative;overflow:hidden}
-.contact-l::before{content:'';position:absolute;bottom:-3rem;right:-3rem;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.07);pointer-events:none}
-.contact-l .tag{color:rgba(255,255,255,.6)}
-.contact-l .big-h{color:var(--white)}
-.contact-l .divider{background:rgba(255,255,255,.4)}
-.contact-l .body-text{color:rgba(255,255,255,.75)}
-.contact-links{margin-top:2.5rem;display:flex;flex-direction:column;gap:1.4rem}
-.clink{display:flex;align-items:center;gap:1.2rem;text-decoration:none;transition:transform .25s}
-.clink:hover{transform:translateX(8px)}
-.clink-icon{width:42px;height:42px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .25s}
-.clink:hover .clink-icon{background:rgba(255,255,255,.3)}
-.clink-icon svg{width:17px;height:17px;stroke:white;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-.clink-lbl{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.55);display:block;margin-bottom:.15rem}
-.clink-val{font-size:1rem;color:white}
-.contact-r{padding:5rem 3rem}
-.form-lbl{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.5rem}
-.form-inp,.form-ta{width:100%;background:var(--card);border:1px solid var(--border);color:var(--white);padding:.85rem 1rem;font-family:var(--fb);font-size:.9rem;outline:none;transition:border-color .25s;margin-bottom:1.2rem}
-.form-inp:focus,.form-ta:focus{border-color:var(--red)}
-.form-ta{resize:vertical;min-height:110px}
-.form-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+/* ── VIBE CARDS ── */
+.vibe-section {
+  border-top: 1px solid var(--border);
+  padding: 5rem 3rem; position: relative; z-index: 1; background: var(--black);
+}
+.vibe-header {
+  display: flex; align-items: flex-end;
+  justify-content: space-between; flex-wrap: wrap;
+  gap: 1.5rem; margin-bottom: 2.5rem;
+}
+.vibe-sub { font-size: .95rem; color: var(--muted); max-width: 340px; line-height: 1.75; }
+.vibe-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+}
+.vibe-card {
+  background: var(--card); aspect-ratio: 3/4;
+  display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 1.5rem;
+  position: relative; overflow: hidden; transition: transform .4s;
+}
+.vibe-card:hover { transform: scale(1.02); z-index: 2; }
+.vibe-card-bg {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg,rgba(209,0,36,.15) 0%,transparent 60%);
+}
+.vibe-card-num {
+  position: absolute; top: 1rem; right: 1rem;
+  font-family: var(--fh); font-size: 3.5rem; color: rgba(255,255,255,.06);
+}
+.vibe-card-title { font-family: var(--fh); font-size: 1.1rem; letter-spacing: .06em; position: relative; z-index: 1; }
+.vibe-card-sub { font-size: .72rem; color: var(--muted); margin-top: .2rem; position: relative; z-index: 1; }
+.vibe-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--red);
+  transform: scaleX(0); transition: transform .4s;
+}
+.vibe-card:hover::after { transform: scaleX(1); }
 
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;position:relative;z-index:1}
-.f-logo{font-family:var(--fh);font-size:1.3rem;letter-spacing:.12em}
-.f-logo em{color:var(--red);font-style:normal}
-.f-mid{text-align:center;font-size:.7rem;letter-spacing:.1em;color:var(--muted)}
-.f-r{font-size:.7rem;letter-spacing:.1em;color:var(--muted);text-align:right}
-.f-r a{color:var(--red);text-decoration:none}
-.f-r a:hover{text-decoration:underline}
+/* ── MGMT ── */
+.mgmt-section {
+  border-top: 1px solid var(--border);
+  padding: 5rem 3rem; position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 2fr; gap: 5rem; align-items: start;
+}
+.mgmt-label {
+  font-family: var(--fh); font-size: clamp(3rem,8vw,7rem);
+  line-height: .88; color: rgba(255,255,255,.07); position: sticky; top: 7rem;
+}
+.mgmt-label span { color: rgba(209,0,36,.2); }
+.mgmt-row {
+  display: flex; gap: 2rem; padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border); align-items: flex-start;
+}
+.mgmt-row:first-child { border-top: 1px solid var(--border); }
+.mgmt-num { font-family: var(--fh); font-size: 3.5rem; color: var(--border); line-height: 1; flex-shrink: 0; width: 80px; }
+.mgmt-row-title { font-family: var(--fh); font-size: 1.5rem; letter-spacing: .06em; margin-bottom: .6rem; }
+.mgmt-row-text { font-size: .95rem; color: var(--muted); line-height: 1.85; }
 
-/* ANIMATIONS */
-@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-.r{opacity:0;transform:translateY(36px);transition:opacity .8s ease,transform .8s ease}
-.r.v{opacity:1;transform:translateY(0)}
+/* ── CONTACT ── */
+.contact {
+  border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; z-index: 1;
+}
+.contact-l {
+  padding: 5rem 3rem; background: var(--red);
+  position: relative; overflow: hidden;
+}
+.contact-l::before {
+  content: ''; position: absolute; bottom: -3rem; right: -3rem;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: rgba(255,255,255,.07); pointer-events: none;
+}
+.contact-l .tag  { color: rgba(255,255,255,.6); }
+.contact-l .big-h { color: var(--white); }
+.contact-l .divider { background: rgba(255,255,255,.4); }
+.contact-l .body-text { color: rgba(255,255,255,.8); }
+.contact-links { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.4rem; }
+.clink {
+  display: flex; align-items: center; gap: 1.2rem;
+  text-decoration: none; transition: transform .25s;
+}
+.clink:hover { transform: translateX(8px); }
+.clink-icon {
+  width: 42px; height: 42px; background: rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: background .25s;
+}
+.clink:hover .clink-icon { background: rgba(255,255,255,.3); }
+.clink-icon svg {
+  width: 17px; height: 17px; stroke: white; fill: none;
+  stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+}
+.clink-lbl {
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(255,255,255,.55); display: block; margin-bottom: .15rem;
+}
+.clink-val { font-size: 1rem; color: white; }
 
-/* MOBILE */
-@media(max-width:900px){
-  #pbar{font-size:.62rem;gap:.6rem;padding:.5rem 1rem}
-  .pbar-lbl{display:none}
-  nav{padding:1rem 1.5rem;top:32px}
-  .nav-r a{display:none}
-  .hero{padding:0 1.5rem 4rem}
-  .hours-strip{grid-template-columns:1fr}
-  .hs-day{border-right:none;border-bottom:1px solid var(--border);padding:1.5rem}
-  .hs-day:last-child{border-bottom:none}
-  .about{grid-template-columns:1fr}
-  .about-l{border-right:none;border-bottom:1px solid var(--border);padding:3rem 1.5rem}
-  .about-r{padding:3rem 1.5rem}
-  .maps-section{grid-template-columns:1fr}
-  .maps-info{border-left:none;border-top:1px solid var(--border);padding:3rem 1.5rem}
-  .maps-frame{min-height:300px}
-  .maps-frame iframe{min-height:300px}
-  .vibe-section{padding:3rem 1.5rem}
-  .vibe-grid{grid-template-columns:1fr 1fr}
-  .mgmt-section{grid-template-columns:1fr;gap:1rem;padding:3rem 1.5rem}
-  .mgmt-label{font-size:4rem;position:static}
-  .contact{grid-template-columns:1fr}
-  .contact-l,.contact-r{padding:3rem 1.5rem}
-  .contact-l{border-bottom:1px solid var(--border)}
-  .detail-grid{grid-template-columns:1fr}
-  .form-2{grid-template-columns:1fr}
-  footer{flex-direction:column;align-items:flex-start;padding:2rem 1.5rem}
-  .f-mid,.f-r{text-align:left}
+/* ── FORM ── */
+.contact-r { padding: 5rem 3rem; background: var(--deep); }
+.form-lbl {
+  font-size: .7rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--white); display: block; margin-bottom: .5rem; font-weight: 500;
+}
+.form-inp {
+  width: 100%; background: var(--card);
+  border: 1px solid #333; color: var(--white);
+  padding: .9rem 1rem; font-family: var(--fb); font-size: .95rem;
+  outline: none; transition: border-color .25s;
+  display: block; margin-bottom: 1.4rem;
+  -webkit-appearance: none;
+}
+.form-inp:focus { border-color: var(--red); }
+.form-ta {
+  width: 100%; background: var(--card);
+  border: 1px solid #333; color: var(--white);
+  padding: .9rem 1rem; font-family: var(--fb); font-size: .95rem;
+  outline: none; transition: border-color .25s;
+  display: block; margin-bottom: 1.4rem;
+  resize: vertical; min-height: 110px;
+  -webkit-appearance: none;
+}
+.form-ta:focus { border-color: var(--red); }
+.form-inp::placeholder, .form-ta::placeholder { color: #555; }
+.form-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 3rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  position: relative; z-index: 1;
+}
+.f-logo { font-family: var(--fh); font-size: 1.3rem; letter-spacing: .12em; }
+.f-logo em { color: var(--red); font-style: normal; }
+.f-mid { text-align: center; font-size: .7rem; letter-spacing: .1em; color: var(--muted); line-height: 1.6; }
+.f-r { font-size: .7rem; letter-spacing: .1em; color: var(--muted); text-align: right; }
+.f-r a { color: var(--red); text-decoration: none; }
+.f-r a:hover { text-decoration: underline; }
+
+/* ── ANIMATIONS ── */
+@keyframes up { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+.r { opacity: 0; transform: translateY(36px); transition: opacity .8s ease, transform .8s ease; }
+.r.v { opacity: 1; transform: translateY(0); }
+
+/* ── MOBILE ── */
+@media (max-width: 900px) {
+  #pbar { font-size: .62rem; padding: .45rem 1rem; }
+  .pbar-lbl { display: none; }
+  nav { padding: 1rem 1.5rem; top: 31px; }
+  .nav-r a { display: none; }
+  .hero { padding: 0 1.5rem 4rem; }
+  .hours-strip { grid-template-columns: 1fr; }
+  .hs-day { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; }
+  .hs-day:last-child { border-bottom: none; }
+  .about { grid-template-columns: 1fr; }
+  .about-l { border-right: none; border-bottom: 1px solid var(--border); padding: 3rem 1.5rem; }
+  .about-r { padding: 3rem 1.5rem; }
+  .location-section { padding: 3rem 1.5rem; }
+  .location-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .detail-grid { grid-template-columns: 1fr; }
+  .vibe-section { padding: 3rem 1.5rem; }
+  .vibe-grid { grid-template-columns: 1fr 1fr; }
+  .mgmt-section { grid-template-columns: 1fr; gap: 1rem; padding: 3rem 1.5rem; }
+  .mgmt-label { font-size: 4rem; position: static; }
+  .contact { grid-template-columns: 1fr; }
+  .contact-l, .contact-r { padding: 3rem 1.5rem; }
+  .contact-l { border-bottom: 1px solid var(--border); }
+  .form-2 { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; padding: 2rem 1.5rem; }
+  .f-mid, .f-r { text-align: left; }
 }
 </style>
 </head>
@@ -215,8 +472,11 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
 <div id="pbar">
   <span class="pbar-lbl">Unser Partner</span>
   <a href="https://maps.app.goo.gl/pUUZiSGL5hqAGxNQ9" target="_blank" class="pbar-link">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-    Massagesalon in der Nähe — auf Google Maps ansehen
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </svg>
+    Massagesalon in der Nähe — jetzt auf Google Maps ansehen
   </a>
 </div>
 
@@ -245,7 +505,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
   <div class="hero-row">
     <p class="hero-desc">Das Hausparty Lokal in Zazenhausen — deine Anlaufstelle für unvergessliche Abende im Wohngebiet. Donnerstag, Freitag &amp; Samstag geöffnet.</p>
     <div class="hero-ctas">
-      <a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank" class="btn-r">Auf Maps finden</a>
+      <a href="https://maps.app.goo.gl/aTiBSUJEM5yNnk9c8" target="_blank" class="btn-r">Auf Maps finden</a>
       <a href="#contact" class="btn-o">Tisch reservieren</a>
     </div>
   </div>
@@ -283,7 +543,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
     <span class="tag">Das Lokal</span>
     <h2 class="big-h">EIN LOKAL<br>WIE KEIN<br>ANDERES</h2>
     <div class="divider"></div>
-    <p class="body-text">Mitten im Wohngebiet von Zazenhausen versteckt sich ein Ort mit ganz eigener Atmosphäre. Kein anonymer Club — sondern ein echtes Hausparty Lokal, das sich wie bei Freunden zuhause anfühlt.</p>
+    <p class="body-text">Mitten im Wohngebiet von Zazenhausen versteckt sich ein Ort mit ganz eigener Atmosphäre. Kein anonymer Club — sondern ein echtes Hausparty Lokal, das sich anfühlt wie bei Freunden zuhause.</p>
     <p class="body-text">Donnerstag bis Samstag abends öffnen wir die Türen. Entspannter Start, steigender Vibe, unvergessliche Nacht.</p>
     <div class="vibe-list">
       <div class="vibe-item">Authentische Hausparty-Atmosphäre</div>
@@ -313,46 +573,47 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
   </div>
 </section>
 
-<!-- LOCATION / MAPS -->
-<section id="location" class="maps-section">
-  <div class="maps-frame">
-    <iframe
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5235!2d9.1652!3d48.8392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4799db43e5a6b1c3%3A0x1!2sZazenhausen%2C+Stuttgart!5e0!3m2!1sde!2sde!4v1700000000000"
-      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-    <div class="maps-pin">
-      <div class="maps-pin-dot"></div>
-      <div class="maps-pin-line"></div>
+<!-- LOCATION INFO -->
+<section id="location" class="location-section">
+  <div class="location-inner">
+    <div class="r">
+      <span class="tag">Wo wir sind</span>
+      <h2 class="big-h">ZAZENHAUSEN<br>IM NORDEN<br>STUTTGARTS</h2>
+      <div class="divider"></div>
+      <p class="body-text">Kein Clubviertel, kein Rummel. Unser Lokal liegt mitten im Wohngebiet — und genau das macht die Atmosphäre so besonders. Einfach auf Google Maps finden und vorbeikommen.</p>
+      <a href="https://maps.app.goo.gl/aTiBSUJEM5yNnk9c8" target="_blank" class="maps-cta" style="margin-top:2rem;display:inline-flex;">Auf Google Maps öffnen</a>
     </div>
-  </div>
-  <div class="maps-info r">
-    <div class="maps-lbl">
-      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      Zazenhausen, Stuttgart
+    <div class="r">
+      <div class="detail-grid">
+        <div class="detail-cell">
+          <div class="detail-k">Stadtteil</div>
+          <div class="detail-v">Zazenhausen, Stuttgart</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-k">Öffnungszeiten</div>
+          <div class="detail-v">Do 20–03 · Fr &amp; Sa 22–07:30</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-k">Typ</div>
+          <div class="detail-v">Hausparty Lokal</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-k">Buchung</div>
+          <div class="detail-v">Auf Anfrage</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-k">Eintritt</div>
+          <div class="detail-v">Auf Anfrage</div>
+        </div>
+        <div class="detail-cell">
+          <div class="detail-k">Kapazität</div>
+          <div class="detail-v">Auf Anfrage</div>
+        </div>
+      </div>
+      <div class="location-note">
+        <p>Auf Google Maps zu finden als:<br><strong style="color:var(--white)">"Hausparty / Eventveranstaltungen MGMT Derrick Derrick"</strong></p>
+      </div>
     </div>
-    <span class="tag">Wo wir sind</span>
-    <h2 class="big-h">ZAZENHAUSEN<br>IM NORDEN<br>STUTTGARTS</h2>
-    <div class="divider"></div>
-    <p class="body-text">Kein Clubviertel, kein Rummel. Unser Lokal liegt mitten im Wohngebiet — und genau das macht die Atmosphäre so besonders.</p>
-    <div class="detail-grid">
-      <div class="detail-cell">
-        <div class="detail-k">Stadtteil</div>
-        <div class="detail-v">Zazenhausen, Stuttgart</div>
-      </div>
-      <div class="detail-cell">
-        <div class="detail-k">Öffnungszeiten</div>
-        <div class="detail-v">Do 20–03 · Fr &amp; Sa 22–07:30</div>
-      </div>
-      <div class="detail-cell">
-        <div class="detail-k">Typ</div>
-        <div class="detail-v">Hausparty Lokal</div>
-      </div>
-      <div class="detail-cell">
-        <div class="detail-k">Buchung</div>
-        <div class="detail-v">Auf Anfrage</div>
-      </div>
-    </div>
-    <a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen+Stuttgart" target="_blank" class="maps-cta">Auf Google Maps öffnen</a>
   </div>
 </section>
 
@@ -395,9 +656,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
 
 <!-- MANAGEMENT -->
 <section id="mgmt" class="mgmt-section">
-  <div class="mgmt-label r">
-    MGMT<br><span>SERVICE</span>
-  </div>
+  <div class="mgmt-label r">MGMT<br><span>SERVICE</span></div>
   <div class="mgmt-content">
     <div style="margin-bottom:2.5rem" class="r">
       <span class="tag">Zusatzleistungen</span>
@@ -435,7 +694,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
     <span class="tag">Komm vorbei</span>
     <h2 class="big-h">FRAG UNS EINFACH AN</h2>
     <div class="divider"></div>
-    <p class="body-text">Tisch reservieren, das Lokal privat buchen oder einfach mehr erfahren — schreib uns oder find uns auf Google Maps.</p>
+    <p class="body-text">Tisch reservieren, das Lokal privat buchen oder mehr erfahren — schreib uns oder find uns auf Google Maps.</p>
     <div class="contact-links">
       <a href="mailto:info@derricks-zazenhausen.de" class="clink">
         <div class="clink-icon">
@@ -446,7 +705,7 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
           <span class="clink-val">info@derricks-zazenhausen.de</span>
         </div>
       </a>
-      <a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank" class="clink">
+      <a href="https://maps.app.goo.gl/aTiBSUJEM5yNnk9c8" target="_blank" class="clink">
         <div class="clink-icon">
           <svg viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>
         </div>
@@ -466,11 +725,18 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
       </a>
     </div>
   </div>
+
   <div class="contact-r r">
     <span class="tag" style="margin-bottom:1.5rem;display:block">Tisch reservieren</span>
     <div class="form-2">
-      <div><label class="form-lbl">Vorname</label><input type="text" class="form-inp" placeholder="Max"></div>
-      <div><label class="form-lbl">Nachname</label><input type="text" class="form-inp" placeholder="Muster"></div>
+      <div>
+        <label class="form-lbl">Vorname</label>
+        <input type="text" class="form-inp" placeholder="Max">
+      </div>
+      <div>
+        <label class="form-lbl">Nachname</label>
+        <input type="text" class="form-inp" placeholder="Muster">
+      </div>
     </div>
     <label class="form-lbl">E-Mail oder Telefon</label>
     <input type="text" class="form-inp" placeholder="max@beispiel.de">
@@ -488,40 +754,56 @@ footer{border-top:1px solid var(--border);padding:2.5rem 3rem;display:flex;align
 <footer>
   <div class="f-logo">DERRICK'S <em>Zazenhausen</em></div>
   <div class="f-mid">Hausparty / Eventveranstaltungen · MGMT Derrick Derrick<br>Zazenhausen, Stuttgart · Do 20–03 · Fr &amp; Sa 22–07:30 Uhr</div>
-  <div class="f-r">© 2025 MGMT Derrick Derrick<br><a href="https://maps.google.com/search?q=Hausparty+Eventveranstaltungen+MGMT+Derrick+Zazenhausen" target="_blank">Auf Google Maps →</a></div>
+  <div class="f-r">© 2025 MGMT Derrick Derrick<br><a href="https://maps.app.goo.gl/aTiBSUJEM5yNnk9c8" target="_blank">Auf Google Maps →</a></div>
 </footer>
 
 <script>
-const cur = document.getElementById('cur');
+// Cursor — start hidden, appear on first mouse move
+const cur  = document.getElementById('cur');
 const curR = document.getElementById('curR');
-document.addEventListener('mousemove', e => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top = e.clientY + 'px';
-  setTimeout(() => {
-    curR.style.left = e.clientX + 'px';
-    curR.style.top = e.clientY + 'px';
-  }, 75);
+let moved = false;
+
+document.addEventListener('mousemove', function(e) {
+  if (!moved) {
+    cur.style.opacity  = '1';
+    curR.style.opacity = '0.5';
+    moved = true;
+  }
+  cur.style.left  = e.clientX + 'px';
+  cur.style.top   = e.clientY + 'px';
+  curR.style.left = e.clientX + 'px';
+  curR.style.top  = e.clientY + 'px';
 });
-document.querySelectorAll('a,button,.vibe-card,.hs-day,.detail-cell').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    curR.style.width = '52px'; curR.style.height = '52px'; curR.style.opacity = '1';
-    cur.style.transform = 'translate(-50%,-50%) scale(1.7)';
+
+document.querySelectorAll('a, button, .vibe-card, .hs-day, .detail-cell').forEach(function(el) {
+  el.addEventListener('mouseenter', function() {
+    curR.style.width   = '52px';
+    curR.style.height  = '52px';
+    curR.style.opacity = '1';
+    cur.style.transform = 'translate(-50%,-50%) scale(1.6)';
   });
-  el.addEventListener('mouseleave', () => {
-    curR.style.width = '34px'; curR.style.height = '34px'; curR.style.opacity = '.45';
+  el.addEventListener('mouseleave', function() {
+    curR.style.width   = '36px';
+    curR.style.height  = '36px';
+    curR.style.opacity = '0.5';
     cur.style.transform = 'translate(-50%,-50%) scale(1)';
   });
 });
 
+// Nav scroll
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', function() {
   nav.classList.toggle('scrolled', window.scrollY > 50);
 });
 
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('v'); });
+// Reveal on scroll
+const obs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) e.target.classList.add('v');
+  });
 }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+document.querySelectorAll('.r').forEach(function(el) { obs.observe(el); });
 </script>
 </body>
 </html>
